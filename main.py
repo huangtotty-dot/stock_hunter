@@ -336,7 +336,8 @@ def main():
     # === 板块热度分计算 ===
     print(f"\n[热度] 计算板块热度分...")
     from modules.heat_tracker import compute_heat_scores
-    data["summary"] = compute_heat_scores(data["summary"], data["sectors"], date_fmt)
+    # 注意：history 键统一使用 YYYYMMDD（与 push_feishu 的历史约定一致），不能传带横线的 date_fmt
+    data["summary"] = compute_heat_scores(data["summary"], data["sectors"], args.date)
     if "热度分" in data["summary"].columns:
         print(f"  [OK] 热度分 TOP3:")
         for _, r in data["summary"].head(3).iterrows():
