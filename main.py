@@ -77,9 +77,16 @@ def prepare_data(config: dict, date_str: str, save_spot: bool = False) -> dict:
     data["report_date"] = date_str
     data["actual_data_dates"] = set()
 
-    # 3. 获取真实行情数据（东方财富/腾讯）
+    # 3. 获取真实行情数据
     print(f"\n[网络] 获取行情数据 ({date_str})...")
-    fetcher = MarketDataFetcher(data_dir=os.path.join(os.path.dirname(__file__), "data"))
+    # 从 watchlist 提取 ST 股票代码
+    st_codes = set()
+    if watchlist_df is not None and "名称" in watchlist_df.columns:
+        st_mask = watchlist_df["名称"].str.startswith(("*ST", "ST", "SST", "S*ST")).fillna(False)
+        st_codes = set(watchlist_df.loc[st_mask, "代码"].astype(str).tolist())
+    if st_codes:
+        print(f"  [INFO] 识别到 {len(st_codes)} 只 ST/*ST 股票，使用 5% 涨停阈值")
+    fetcher = MarketDataFetcher(data_dir=os.path.join(os.path.dirname(__file__), "data"), st_codes=st_codes)
     market_df = fetcher.fetch_for_date(codes, date_str)
     data["failed_codes"] = fetcher.last_failed  # 传递失败股票代码到报告
 
@@ -130,15 +137,9 @@ def score_stocks(data: dict, config: dict) -> list:
         # 使用真实行情数据（如果获取成功），否则用默认值
         # 真实数据字段：涨跌幅, 涨停, 成交额, 换手率, 振幅, 量比, 现价, 最高, 最低, 今开, 昨收
         stock.setdefault("涨停", int(row.get("涨停", 0)) if pd.notna(row.get("涨停")) else 0)
-        stock.setdefault("连板天数", 0)  # 需要历史数据计算，当前暂用0
-        stock.setdefault("领涨天数", 0)  # 需要历史数据计算
-        stock.setdefault("突破", 1 if abs(row.get("涨跌幅", 0)) > 5 else 0)  # 涨跌幅>5%视为突破
-        stock.setdefault("封单质量", 0)  # 需要盘口数据
+        stock.setdefault("连板天数", 0)
         stock.setdefault("暗线概念数", len(str(stock.get("韭研概念", "")).split("_")))
         stock.setdefault("量比", float(row.get("量比", 1.0)) if pd.notna(row.get("量比")) else 1.0)
-        stock.setdefault("板块涨停家数", 0)  # 需要板块统计
-        stock.setdefault("近5日振幅", float(row.get("振幅", 5.0)) if pd.notna(row.get("振幅")) else 5.0)
-        stock.setdefault("近5日换手率", float(row.get("换手率", 3.0)) if pd.notna(row.get("换手率")) else 3.0)
         stock_list.append(stock)
 
     scored_list = scorer.compute_batch(stock_list)
@@ -331,11 +332,25 @@ def main():
     # 合并到 summary
     if not fb_df.empty and not data.get("summary", pd.DataFrame()).empty:
         data["summary"] = data["summary"].merge(fb_df, on="板块", how="left")
-        # 调整列顺序：排名 板块 细分数量 股票数量 平均分 前排率% 后排率% 涨停数 最强细分 最强细分得分 前三强
-        cols = ["排名", "板块", "细分数量", "股票数量", "平均分", "前排率%", "后排率%",
-                "涨停数", "最强细分", "最强细分得分", "前三强"]
-        data["summary"] = data["summary"][[c for c in cols if c in data["summary"].columns]]
-        print(f"  [OK] 已合并前排率/后排率到概念总排名")
+
+    # === 板块热度分计算 ===
+    print(f"\n[热度] 计算板块热度分...")
+    from modules.heat_tracker import compute_heat_scores
+    data["summary"] = compute_heat_scores(data["summary"], data["sectors"], date_fmt)
+    if "热度分" in data["summary"].columns:
+        print(f"  [OK] 热度分 TOP3:")
+        for _, r in data["summary"].head(3).iterrows():
+            print(f"     {r['板块']}: 热度分 {r['热度分']} {r.get('趋势', '')}")
+    else:
+        print(f"  [INFO] 热度分计算跳过（数据不足）")
+
+    # === 热度分最高/最低板块 ===
+    heat_top_sector = None
+    heat_bottom_sector = None
+    if "热度分" in data["summary"].columns and data["summary"]["热度分"].notna().any():
+        hs = data["summary"]["热度分"]
+        heat_top_sector = f"{data['summary'].loc[hs.idxmax(), '板块']} ({round(float(hs.max()), 1)})"
+        heat_bottom_sector = f"{data['summary'].loc[hs.idxmin(), '板块']} ({round(float(hs.min()), 1)})"
 
     # === 计算总体平均分（基于概念总排名 summary 的 平均分/股票数量 列）===
     overall_avg_weighted = None  # 股票数加权: Σ(板块平均分×板块股票数量)/Σ(板块股票数量)
@@ -409,6 +424,8 @@ def main():
         "overall_avg_simple": overall_avg_simple,
         "overall_top_sector": overall_top_sector,
         "overall_bottom_sector": overall_bottom_sector,
+        "heat_top_sector": heat_top_sector,
+        "heat_bottom_sector": heat_bottom_sector,
         "validate_result": "通过"  # 后续验证步骤后更新
     }
 

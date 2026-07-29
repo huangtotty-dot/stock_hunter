@@ -23,9 +23,10 @@ class MarketDataFetcher:
     HISTORICAL_WORKERS = 10  # 并发数，平衡速度和稳定性
     HISTORICAL_RETRIES = 2
 
-    def __init__(self, data_dir: str = None):
+    def __init__(self, data_dir: str = None, st_codes: set = None):
         self.data_dir = data_dir or os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
         self.last_failed = []  # 记录上次失败的股票代码
+        self._st_codes = st_codes or set()  # ST 股票代码集合
 
     def fetch_for_date(self, codes: List[str], date_str: str) -> pd.DataFrame:
         """
@@ -194,17 +195,24 @@ class MarketDataFetcher:
             open_price = 0.0
 
         is_limit = 0
-        if change_pct > 9.5:
-            if code.startswith(("30", "68")) and change_pct >= 19.5:
+        stock_name = str(fields[1]).strip()
+        is_st = stock_name.startswith(("*ST", "ST", "SST", "S*ST"))
+        if is_st:
+            if change_pct >= 4.5:
                 is_limit = 1
-            elif code.startswith(("8", "9")) and change_pct >= 29.5:
+        elif code.startswith(("30", "68")):
+            if change_pct >= 19.5:
                 is_limit = 1
-            elif not code.startswith(("30", "68", "8", "9")):
+        elif code.startswith(("8", "9")):
+            if change_pct >= 29.5:
+                is_limit = 1
+        else:
+            if change_pct >= 9.5:
                 is_limit = 1
 
         return code, {
             "symbol": symbol,
-            "名称": str(fields[1]).strip(),
+            "名称": stock_name,
             "现价": price,
             "涨跌幅": change_pct,
             "涨停": is_limit,
@@ -323,8 +331,7 @@ class MarketDataFetcher:
                                 target_dt = datetime.strptime(target_date_str, '%Y-%m-%d')
                                 fallback_dt = datetime.strptime(str(fallback_date), '%Y-%m-%d')
                                 gap_days = (target_dt - fallback_dt).days
-                                if gap_days > 5:
-                                    # 回退太远，可能目标日期根本不在返回数据中
+                                if gap_days > 30:
                                     return {"_error": code, "_msg": f"target {target_date_str} missing, fallback {fallback_date} too far ({gap_days} days)"}
                             except (ValueError, TypeError):
                                 pass
@@ -365,12 +372,18 @@ class MarketDataFetcher:
                         amount = close * volume * volume_unit
 
                     is_limit = 0
-                    if change_pct >= 9.5:
-                        if code.startswith(("30", "68")) and change_pct >= 19.5:
+                    is_st = code in self._st_codes
+                    if is_st:
+                        if change_pct >= 4.5:
                             is_limit = 1
-                        elif code.startswith(("8", "9")) and change_pct >= 29.5:
+                    elif code.startswith(("30", "68")):
+                        if change_pct >= 19.5:
                             is_limit = 1
-                        elif not code.startswith(("30", "68", "8", "9")):
+                    elif code.startswith(("8", "9")):
+                        if change_pct >= 29.5:
+                            is_limit = 1
+                    else:
+                        if change_pct >= 9.5:
                             is_limit = 1
 
                     # 派生指标

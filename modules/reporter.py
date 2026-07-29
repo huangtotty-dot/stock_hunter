@@ -146,6 +146,8 @@ class ExcelReporter(ReporterBase):
              "各板块平均分按股票数加权；等权为板块简单平均", ""],
             ["板块最高/最低", f"{stats.get('overall_top_sector') or '-'} / {stats.get('overall_bottom_sector') or '-'}",
              "平均分最高/最低的板块（括号内为该板块平均分）", ""],
+            ["热度分最高/最低", f"{stats.get('heat_top_sector') or '-'} / {stats.get('heat_bottom_sector') or '-'}",
+             "板块热度分（0-100），基于涨停密度+上涨广度+量能放大+前排强度", ""],
         ]
 
         light_blue = PatternFill(start_color="ADD8E6", end_color="ADD8E6", fill_type="solid")
@@ -196,19 +198,35 @@ class ExcelReporter(ReporterBase):
 
         # 写入标题行
         title_row = 1
-        self.styler.merge_and_title(ws, title_row, 1, 11, "=== 概念板块全局概览 ===")
+        merge_width = max(15, len(df_summary.columns) if not df_summary.empty else 11)
+        self.styler.merge_and_title(ws, title_row, 1, merge_width, "=== 概念板块全局概览 ===")
 
-        # 标题行下方展示板块总体平均分（加权/等权），数据表起始行相应后移
+        # 标题行下方展示板块总体平均分 + 热度分
         data_start_row = 2
         stats = stats or {}
+        overview_parts = []
         w_avg = stats.get("overall_avg_weighted")
         s_avg = stats.get("overall_avg_simple")
         if w_avg is not None or s_avg is not None:
-            overview_txt = f"板块总体平均分：加权 {_fmt_stat(w_avg)} / 等权 {_fmt_stat(s_avg)}"
+            overview_parts.append(f"板块总体平均分：加权 {_fmt_stat(w_avg)} / 等权 {_fmt_stat(s_avg)}")
             if stats.get("overall_top_sector") or stats.get("overall_bottom_sector"):
-                overview_txt += (f"　｜　最高 {stats.get('overall_top_sector') or '-'}"
-                                 f"　｜　最低 {stats.get('overall_bottom_sector') or '-'}")
-            self.styler.merge_and_title(ws, 2, 1, 11, overview_txt)
+                overview_parts.append(f"平均分最高 {stats.get('overall_top_sector') or '-'}　最低 {stats.get('overall_bottom_sector') or '-'}")
+        heat_top = stats.get("heat_top_sector")
+        heat_bottom = stats.get("heat_bottom_sector")
+        if heat_top or heat_bottom:
+            overview_parts.append(f"热度分最高 {heat_top or '-'}　最低 {heat_bottom or '-'}")
+        if overview_parts:
+            overview_txt = "　｜　".join(overview_parts)
+            self.styler.merge_and_title(ws, 2, 1, merge_width, overview_txt)
+            data_start_row = 3
+
+        # 列一下热度分前5
+        if data_start_row == 2 and not df_summary.empty and "热度分" in df_summary.columns:
+            heat_top5 = df_summary.head(5)
+            top5_txt = "热度TOP5: " + " | ".join(
+                f"{r['板块']}({r['热度分']}{r.get('趋势', '')})" for _, r in heat_top5.iterrows()
+            )
+            self.styler.merge_and_title(ws, 2, 1, merge_width, top5_txt)
             data_start_row = 3
 
         # 写入数据表

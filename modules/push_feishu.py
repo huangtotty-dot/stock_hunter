@@ -7,6 +7,7 @@ import json
 import requests
 import os
 import time
+import pandas as pd
 from datetime import datetime, timedelta
 
 
@@ -231,56 +232,60 @@ def send_report_summary(config: dict, data: dict, output_path: str, date_str: st
     app_secret = feishu_cfg.get("app_secret", "")
     chat_id = feishu_cfg.get("chat_id", "")
 
-    # 1. 保存历史摘要
-    if summary is not None and not summary.empty and '板块' in summary.columns:
-        sectors_today = []
-        for _, row in summary.iterrows():
-            sectors_today.append({
-                "板块": str(row.get('板块', '')),
-                "排名": int(row.get('排名', 0)) if pd.notna(row.get('排名')) else 0,
-                "平均分": float(row.get('平均分', 0)) if pd.notna(row.get('平均分')) else 0.0,
-                "涨停数": int(row.get('涨停数', 0)) if pd.notna(row.get('涨停数')) else 0,
-                "股票数量": int(row.get('股票数量', 0)) if pd.notna(row.get('股票数量')) else 0,
-                "前排率%": float(row.get('前排率%', 0)) if pd.notna(row.get('前排率%')) else 0.0,
-            })
-        _save_history_entry(date_str, sectors_today)
-
-    # 2. 构建文字摘要
+    # 1. 读取历史摘要（由 heat_tracker 模块无条件保存）
     history = _load_history()
     past_date = _find_5_days_ago(history, date_str)
     past_sectors = {s["板块"]: s for s in history.get(past_date, [])} if past_date else {}
 
+    # 2. 构建文字摘要
     lines = []
     lines.append(f"📊 韭研概念打分报告 | {date_str}")
     lines.append(f"打分池: {stats.get('pool_count', 0)} 只 | 行情成功: {stats.get('market_success', 0)} 只 | 失败: {stats.get('market_failed', 0)} 只")
     lines.append(f"板块数: {stats.get('sector_count', 0)} | 得分范围: {stats.get('score_range', 'N/A')} | 平均: {stats.get('score_avg', 0)}")
+    heat_top = stats.get('heat_top_sector', '')
+    if heat_top:
+        lines.append(f"🔥热度最高: {heat_top}")
     lines.append("")
 
     if summary is not None and not summary.empty and '板块' in summary.columns:
-        lines.append(f"📈 板块5日变化追踪 (对比: {past_date or '无历史'})")
-        lines.append("-" * 60)
-        lines.append(f"{'板块':<12} {'排名':>6} {'均分':>8} {'涨停':>6}")
-        lines.append("-" * 60)
+        has_heat = "热度分" in summary.columns
+        lines.append(f"📈 板块热度追踪 (对比: {past_date or '无历史'})")
+        lines.append("-" * 70)
+        if has_heat:
+            lines.append(f"{'板块':<12} {'热度':>6} {'趋势':>6} {'排名':>6} {'涨停':>6}")
+        else:
+            lines.append(f"{'板块':<12} {'排名':>6} {'均分':>8} {'涨停':>6}")
+        lines.append("-" * 70)
         for _, row in summary.iterrows():
             sector = str(row.get('板块', '-'))
             rank = int(row.get('排名', 0)) if pd.notna(row.get('排名')) else 0
-            avg = float(row.get('平均分', 0)) if pd.notna(row.get('平均分')) else 0.0
             zt = int(row.get('涨停数', 0)) if pd.notna(row.get('涨停数')) else 0
 
-            past = past_sectors.get(sector)
-            if past:
-                rank_arrow, rank_diff = _delta_arrow(rank, past.get('排名'), reverse=True)
-                avg_arrow, avg_diff = _delta_arrow(avg, past.get('平均分'))
-                zt_arrow, zt_diff = _delta_arrow(zt, past.get('涨停数'))
-                rank_str = f"{rank}{rank_arrow}"
-                avg_str = f"{avg:.1f}{avg_arrow}"
-                zt_str = f"{zt}{zt_arrow}"
+            if has_heat:
+                heat = row.get('热度分', 0)
+                trend = row.get('趋势', '')
+                past = past_sectors.get(sector)
+                if past:
+                    zt_arrow, _ = _delta_arrow(zt, past.get('涨停数'))
+                    zt_str = f"{zt}{zt_arrow}"
+                else:
+                    zt_str = f"{zt}-"
+                lines.append(f"{sector:<12} {heat:>6} {trend:>6} {rank:>6} {zt_str:>6}")
             else:
-                rank_str = f"{rank}新"
-                avg_str = f"{avg:.1f}-"
-                zt_str = f"{zt}-"
-
-            lines.append(f"{sector:<12} {rank_str:>6} {avg_str:>8} {zt_str:>6}")
+                avg = float(row.get('平均分', 0)) if pd.notna(row.get('平均分')) else 0.0
+                past = past_sectors.get(sector)
+                if past:
+                    rank_arrow, _ = _delta_arrow(rank, past.get('排名'), reverse=True)
+                    avg_arrow, _ = _delta_arrow(avg, past.get('平均分'))
+                    zt_arrow, _ = _delta_arrow(zt, past.get('涨停数'))
+                    rank_str = f"{rank}{rank_arrow}"
+                    avg_str = f"{avg:.1f}{avg_arrow}"
+                    zt_str = f"{zt}{zt_arrow}"
+                else:
+                    rank_str = f"{rank}新"
+                    avg_str = f"{avg:.1f}-"
+                    zt_str = f"{zt}-"
+                lines.append(f"{sector:<12} {rank_str:>6} {avg_str:>8} {zt_str:>6}")
         lines.append("")
 
     if top5_list:
@@ -357,4 +362,3 @@ def send_error_alert(config: dict, error_msg: str, date_str: str) -> dict:
     return {"ok": False}
 
 
-import pandas as pd
