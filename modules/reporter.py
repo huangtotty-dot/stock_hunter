@@ -268,7 +268,7 @@ class ExcelReporter(ReporterBase):
 
         # 构建 DataFrame
         columns = ["排名", "代码", "名称", "所属板块", "总得分",
-                   "涨停率%", "成交额(亿)", "D1强势形态且新高", "D2强势形态",
+                   "涨跌幅", "成交额(亿)", "D1强势形态且新高", "D2强势形态",
                    "D3突破形态", "D4首板资金池", "D5潜在突破10日", "D6潜在突破5日",
                    "D7持续性", "D8情绪分数", "D9活跃程度", "大成交额额外加分"]
         rows = []
@@ -279,7 +279,7 @@ class ExcelReporter(ReporterBase):
                 "名称": stock.get("名称", ""),
                 "所属板块": stock.get("所属板块", stock.get("板块", "")),
                 "总得分": stock.get("总得分", 0),
-                "涨停率%": stock.get("涨停率%", 0),
+                "涨跌幅": stock.get("涨跌幅", 0),
                 "成交额(亿)": round(stock.get("成交额", 0) / 100000000, 2) if stock.get("成交额", 0) else 0,
                 "D1强势形态且新高": stock.get("D1强势形态且新高", 0),
                 "D2强势形态": stock.get("D2强势形态", 0),
@@ -309,7 +309,7 @@ class ExcelReporter(ReporterBase):
         # 计算子概念排名（按 子概念 分组，即 jiuyan_concept 按 - 拆分后的前半部分）
         sub_stats = df_sector.groupby("子概念").agg({
             "总得分": ["mean", "max", "count"],
-            "涨停率%": lambda x: int((x >= 9.9).sum()),
+            "涨跌幅": lambda x: int((x >= 9.9).sum()),
         }).reset_index()
         sub_stats.columns = ["子概念", "平均分", "最高分", "股票数量", "涨停数"]
         sub_stats = sub_stats.sort_values("平均分", ascending=False).reset_index(drop=True)
@@ -403,7 +403,7 @@ class ExcelReporter(ReporterBase):
 
         # 个股明细表头（浅绿色背景）
         detail_headers = ["排名", "代码", "名称", "所属板块", "总得分",
-                          "涨停率%", "成交额(亿)", "D1强势形态且新高", "D2强势形态",
+                          "涨跌幅", "成交额(亿)", "D1强势形态且新高", "D2强势形态",
                           "D4首板资金池", "D5潜在突破10日", "D6潜在突破5日",
                           "D7持续性", "D8情绪分数", "D9活跃程度", "大成交额额外加分"]
         light_green = PatternFill(start_color="90EE90", end_color="90EE90", fill_type="solid")
@@ -438,7 +438,7 @@ class ExcelReporter(ReporterBase):
                 ws.cell(row=current_row, column=3, value=str(row.get("名称", "")))
                 ws.cell(row=current_row, column=4, value=str(row.get("所属板块", "")))
                 ws.cell(row=current_row, column=5, value=int(row.get("总得分", 0)))
-                ws.cell(row=current_row, column=6, value=row.get("涨停率%", 0))
+                ws.cell(row=current_row, column=6, value=row.get("涨跌幅", 0))
                 amount = row.get("成交额", 0) or 0
                 ws.cell(row=current_row, column=7, value=round(amount / 100000000, 2) if amount else 0)
                 ws.cell(row=current_row, column=8, value=int(row.get("D1强势形态且新高", 0)))

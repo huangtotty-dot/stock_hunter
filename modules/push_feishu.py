@@ -267,17 +267,20 @@ def send_report_summary(config: dict, data: dict, output_path: str, date_str: st
                 past = past_sectors.get(sector)
                 if past:
                     zt_arrow, _ = _delta_arrow(zt, past.get('涨停数'))
+                    heat_arrow, _ = _delta_arrow(heat, past.get('热度分'))
                     zt_str = f"{zt}{zt_arrow}"
+                    heat_str = f"{heat}{heat_arrow}"
                 else:
                     zt_str = f"{zt}-"
-                lines.append(f"{sector:<12} {heat:>6} {trend:>6} {rank:>6} {zt_str:>6}")
+                    heat_str = f"{heat}-"
+                lines.append(f"{sector:<12} {heat_str:>8} {trend:>6} {rank:>6} {zt_str:>6}")
             else:
                 avg = float(row.get('平均分', 0)) if pd.notna(row.get('平均分')) else 0.0
                 past = past_sectors.get(sector)
                 if past:
-                    rank_arrow, _ = _delta_arrow(rank, past.get('排名'), reverse=True)
-                    avg_arrow, _ = _delta_arrow(avg, past.get('平均分'))
-                    zt_arrow, _ = _delta_arrow(zt, past.get('涨停数'))
+                    rank_arrow, _ = _delta_arrow(rank, past.get('排名', rank), reverse=True)
+                    avg_arrow, _ = _delta_arrow(avg, past.get('平均分', avg))
+                    zt_arrow, _ = _delta_arrow(zt, past.get('涨停数', zt))
                     rank_str = f"{rank}{rank_arrow}"
                     avg_str = f"{avg:.1f}{avg_arrow}"
                     zt_str = f"{zt}{zt_arrow}"
