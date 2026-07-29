@@ -11,6 +11,8 @@ from typing import Dict, List, Optional
 import pandas as pd
 from openpyxl import Workbook
 from openpyxl.styles import PatternFill, Font, Alignment
+from openpyxl.formatting.rule import ColorScaleRule
+from openpyxl.utils import get_column_letter
 from openpyxl.utils.dataframe import dataframe_to_rows
 
 from .styler import ExcelStyler, V8Style
@@ -189,50 +191,116 @@ class ExcelReporter(ReporterBase):
         return ws
 
     def _build_summary_sheet(self, wb, df_summary: pd.DataFrame, stats: dict = None):
-        """构建 Sheet 1: 概念总排名"""
-        # 删除默认的 Sheet（如果存在），避免 wb.active 指向 info sheet
+        """构建 Sheet 1: 概念总排名（P0: 热度可视化增强）"""
         if "Sheet" in wb.sheetnames:
             del wb["Sheet"]
-        
+
         ws = wb.create_sheet(title=self.sheets_cfg.get("summary", "1-概念总排名"))
-
-        # 写入标题行
-        title_row = 1
-        merge_width = max(15, len(df_summary.columns) if not df_summary.empty else 11)
-        self.styler.merge_and_title(ws, title_row, 1, merge_width, "=== 概念板块全局概览 ===")
-
-        # 标题行下方展示板块总体平均分 + 热度分
-        data_start_row = 2
         stats = stats or {}
+        has_heat = not df_summary.empty and "热度分" in df_summary.columns
+        merge_width = max(15, len(df_summary.columns) if not df_summary.empty else 11)
+
+        # ---- Row 1: 标题 ----
+        self.styler.merge_and_title(ws, 1, 1, merge_width, "=== 概念板块全局概览 ===")
+
+        # ---- Row 2: 🔥 热度TOP5速览条（P0: 始终显示，修复死代码）----
+        if has_heat:
+            heat_top5 = df_summary.head(5)
+            top5_parts = []
+            for _, r in heat_top5.iterrows():
+                trend_icon = r.get('趋势', '')
+                top5_parts.append(f"{r['板块']}({r['热度分']}{trend_icon})")
+            heat_bar = "🔥 热度TOP5: " + " | ".join(top5_parts)
+            heat_cell = ws.cell(row=2, column=1, value=heat_bar)
+            heat_cell.font = Font(name="微软雅黑", bold=True, color="CC0000", size=11)
+            heat_cell.alignment = Alignment(horizontal="left", vertical="center")
+            ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=merge_width)
+
+        # ---- Row 3: 辅助信息（平均分/热度最高最低）----
+        current_info_row = 2
         overview_parts = []
         w_avg = stats.get("overall_avg_weighted")
         s_avg = stats.get("overall_avg_simple")
         if w_avg is not None or s_avg is not None:
-            overview_parts.append(f"板块总体平均分：加权 {_fmt_stat(w_avg)} / 等权 {_fmt_stat(s_avg)}")
-            if stats.get("overall_top_sector") or stats.get("overall_bottom_sector"):
-                overview_parts.append(f"平均分最高 {stats.get('overall_top_sector') or '-'}　最低 {stats.get('overall_bottom_sector') or '-'}")
-        heat_top = stats.get("heat_top_sector")
-        heat_bottom = stats.get("heat_bottom_sector")
-        if heat_top or heat_bottom:
-            overview_parts.append(f"热度分最高 {heat_top or '-'}　最低 {heat_bottom or '-'}")
+            overview_parts.append(f"板块平均分：加权 {_fmt_stat(w_avg)} / 等权 {_fmt_stat(s_avg)}")
+        heat_top_s = stats.get("heat_top_sector")
+        heat_bottom_s = stats.get("heat_bottom_sector")
+        if heat_top_s or heat_bottom_s:
+            overview_parts.append(f"热度最高 {heat_top_s or '-'}　最低 {heat_bottom_s or '-'}")
         if overview_parts:
-            overview_txt = "　｜　".join(overview_parts)
-            self.styler.merge_and_title(ws, 2, 1, merge_width, overview_txt)
-            data_start_row = 3
+            info_row = 3 if has_heat else 2
+            info_txt = "　｜　".join(overview_parts)
+            info_cell = ws.cell(row=info_row, column=1, value=info_txt)
+            info_cell.font = Font(name="微软雅黑", color="333333", size=9)
+            info_cell.alignment = Alignment(horizontal="left", vertical="center")
+            ws.merge_cells(start_row=info_row, start_column=1, end_row=info_row, end_column=merge_width)
+            current_info_row = info_row
 
-        # 列一下热度分前5
-        if data_start_row == 2 and not df_summary.empty and "热度分" in df_summary.columns:
-            heat_top5 = df_summary.head(5)
-            top5_txt = "热度TOP5: " + " | ".join(
-                f"{r['板块']}({r['热度分']}{r.get('趋势', '')})" for _, r in heat_top5.iterrows()
-            )
-            self.styler.merge_and_title(ws, 2, 1, merge_width, top5_txt)
-            data_start_row = 3
+        data_start_row = current_info_row + 1
 
-        # 写入数据表
+        # ---- 写入数据表 ----
         next_row = self._write_dataframe(ws, df_summary, start_row=data_start_row)
 
-        # 自动调整列宽
+        # ---- P0: 热度分列色阶（白→黄→红）----
+        if has_heat:
+            heat_col_idx = None
+            for c in range(1, ws.max_column + 1):
+                if ws.cell(row=data_start_row, column=c).value == "热度分":
+                    heat_col_idx = c
+                    break
+            if heat_col_idx:
+                heat_col_letter = get_column_letter(heat_col_idx)
+                data_end = data_start_row + len(df_summary)
+                if data_end > data_start_row:
+                    ws.conditional_formatting.add(
+                        f"{heat_col_letter}{data_start_row+1}:{heat_col_letter}{data_end}",
+                        ColorScaleRule(
+                            start_type="min", start_color="FFFFFF",
+                            mid_type="percentile", mid_value=50, mid_color="FFEB9C",
+                            end_type="max", end_color="FF4444"
+                        )
+                    )
+
+            # ---- P0: 趋势列按标签填底色 ----
+            trend_col_idx = None
+            for c in range(1, ws.max_column + 1):
+                if ws.cell(row=data_start_row, column=c).value == "趋势":
+                    trend_col_idx = c
+                    break
+            if trend_col_idx:
+                trend_fills = {
+                    "🔥加速": PatternFill(start_color="CC0000", end_color="CC0000", fill_type="solid"),
+                    "📈升温": PatternFill(start_color="FCE4EC", end_color="FCE4EC", fill_type="solid"),
+                    "➡️平稳": PatternFill(start_color="F0F0F0", end_color="F0F0F0", fill_type="solid"),
+                    "📉退潮": PatternFill(start_color="D6EAF8", end_color="D6EAF8", fill_type="solid"),
+                    "🧊冰点": PatternFill(start_color="2B579A", end_color="2B579A", fill_type="solid"),
+                }
+                trend_fonts = {
+                    "🔥加速": Font(name="微软雅黑", bold=True, color="FFFFFF", size=9),
+                    "🧊冰点": Font(name="微软雅黑", bold=True, color="FFFFFF", size=9),
+                }
+                for r in range(data_start_row + 1, data_start_row + 1 + len(df_summary)):
+                    cell = ws.cell(row=r, column=trend_col_idx)
+                    label = str(cell.value or "")
+                    fill = trend_fills.get(label)
+                    if fill:
+                        cell.fill = fill
+                    font = trend_fonts.get(label)
+                    if font:
+                        cell.font = font
+
+            # ---- P0: 热度分 TOP3 行加粗 ----
+            for r in range(data_start_row + 1, min(data_start_row + 4, data_start_row + 1 + len(df_summary))):
+                for c in range(1, ws.max_column + 1):
+                    cell = ws.cell(row=r, column=c)
+                    if cell.font:
+                        cell.font = Font(
+                            name=cell.font.name or "微软雅黑",
+                            bold=True,
+                            color=cell.font.color or "000000",
+                            size=cell.font.size or 9
+                        )
+
         self.styler.auto_width(ws)
         return ws
 
@@ -255,35 +323,47 @@ class ExcelReporter(ReporterBase):
         self.styler.auto_width(ws)
         return ws
 
-    def _build_top5_sheet(self, wb, top5_list: List[dict]):
-        """构建 Sheet 3: TOP5"""
+    def _build_top5_sheet(self, wb, top5_list: List[dict], df_summary: pd.DataFrame = None):
+        """构建 Sheet 3: TOP5（P1: 删D3死列，增板块热度分/趋势）"""
         ws = wb.create_sheet(title=self.sheets_cfg.get("top5", "3-TOP5"))
 
-        title_row = 1
-        self.styler.merge_and_title(ws, title_row, 1, 16, "=== 全市场 TOP5 强势标的 ===")
+        ncols = 17  # 排名+代码+名称+板块+得分+涨跌幅+成交额+8dim+热度分+趋势
+        self.styler.merge_and_title(ws, 1, 1, ncols, "=== 全市场 TOP5 强势标的 ===")
 
         if not top5_list:
             ws.cell(row=2, column=1, value="暂无数据")
             return ws
 
-        # 构建 DataFrame
+        # 构建板块热度查找表
+        heat_map = {}
+        if df_summary is not None and not df_summary.empty and "板块" in df_summary.columns:
+            if "热度分" in df_summary.columns:
+                for _, r in df_summary.iterrows():
+                    heat_map[str(r["板块"])] = {
+                        "热度分": r.get("热度分", 0),
+                        "趋势": r.get("趋势", ""),
+                    }
+
         columns = ["排名", "代码", "名称", "所属板块", "总得分",
-                   "涨跌幅", "成交额(亿)", "D1强势形态且新高", "D2强势形态",
-                   "D3突破形态", "D4首板资金池", "D5潜在突破10日", "D6潜在突破5日",
-                   "D7持续性", "D8情绪分数", "D9活跃程度", "大成交额额外加分"]
+                   "涨跌幅", "成交额(亿)",
+                   "D1强势形态且新高", "D2强势形态", "D4首板资金池",
+                   "D5潜在突破10日", "D6潜在突破5日",
+                   "D7持续性", "D8情绪分数", "D9活跃程度", "大成交额额外加分",
+                   "板块热度分", "板块趋势"]
         rows = []
         for stock in top5_list:
+            sector = stock.get("所属板块", stock.get("板块", ""))
+            hi = heat_map.get(sector, {})
             rows.append({
                 "排名": stock.get("排名", ""),
                 "代码": stock.get("代码", ""),
                 "名称": stock.get("名称", ""),
-                "所属板块": stock.get("所属板块", stock.get("板块", "")),
+                "所属板块": sector,
                 "总得分": stock.get("总得分", 0),
                 "涨跌幅": stock.get("涨跌幅", 0),
                 "成交额(亿)": round(stock.get("成交额", 0) / 100000000, 2) if stock.get("成交额", 0) else 0,
                 "D1强势形态且新高": stock.get("D1强势形态且新高", 0),
                 "D2强势形态": stock.get("D2强势形态", 0),
-                "D3突破形态": stock.get("D3突破形态", 0),
                 "D4首板资金池": stock.get("D4首板资金池", 0),
                 "D5潜在突破10日": stock.get("D5潜在突破10日", 0),
                 "D6潜在突破5日": stock.get("D6潜在突破5日", 0),
@@ -291,9 +371,34 @@ class ExcelReporter(ReporterBase):
                 "D8情绪分数": stock.get("D8情绪分数", 0),
                 "D9活跃程度": stock.get("D9活跃程度", 0),
                 "大成交额额外加分": stock.get("大成交额额外加分", 0),
+                "板块热度分": hi.get("热度分", 0),
+                "板块趋势": hi.get("趋势", ""),
             })
         df_top5 = pd.DataFrame(rows, columns=columns)
         self._write_dataframe(ws, df_top5, start_row=2)
+
+        # 板块趋势列着色（复用 summary 的色表）
+        trend_fills = {
+            "🔥加速": PatternFill(start_color="CC0000", end_color="CC0000", fill_type="solid"),
+            "📈升温": PatternFill(start_color="FCE4EC", end_color="FCE4EC", fill_type="solid"),
+            "➡️平稳": PatternFill(start_color="F0F0F0", end_color="F0F0F0", fill_type="solid"),
+            "📉退潮": PatternFill(start_color="D6EAF8", end_color="D6EAF8", fill_type="solid"),
+            "🧊冰点": PatternFill(start_color="2B579A", end_color="2B579A", fill_type="solid"),
+        }
+        trend_fonts = {
+            "🔥加速": Font(name="微软雅黑", bold=True, color="FFFFFF", size=9),
+            "🧊冰点": Font(name="微软雅黑", bold=True, color="FFFFFF", size=9),
+        }
+        for r in range(3, 3 + len(top5_list)):
+            cell = ws.cell(row=r, column=ncols)  # 最后列=趋势
+            label = str(cell.value or "")
+            fill = trend_fills.get(label)
+            if fill:
+                cell.fill = fill
+            font = trend_fonts.get(label)
+            if font:
+                cell.font = font
+
         self.styler.auto_width(ws)
         return ws
 
@@ -307,11 +412,20 @@ class ExcelReporter(ReporterBase):
         self.styler.merge_and_title(ws, title_row, 1, 16, f"=== {sector_name} 子概念排名（按平均分）===")
 
         # 计算子概念排名（按 子概念 分组，即 jiuyan_concept 按 - 拆分后的前半部分）
-        sub_stats = df_sector.groupby("子概念").agg({
-            "总得分": ["mean", "max", "count"],
-            "涨跌幅": lambda x: int((x >= 9.9).sum()),
-        }).reset_index()
-        sub_stats.columns = ["子概念", "平均分", "最高分", "股票数量", "涨停数"]
+        # P1: 涨停统计统一用 market_data 已判定的"涨停"字段，删 >=9.9 重算
+        zt_field = "涨停" if "涨停" in df_sector.columns else None
+        if zt_field:
+            sub_stats = df_sector.groupby("子概念").agg({
+                "总得分": ["mean", "max", "count"],
+                zt_field: "sum",
+            }).reset_index()
+            sub_stats.columns = ["子概念", "平均分", "最高分", "股票数量", "涨停数"]
+        else:
+            sub_stats = df_sector.groupby("子概念").agg({
+                "总得分": ["mean", "max", "count"],
+            }).reset_index()
+            sub_stats.columns = ["子概念", "平均分", "最高分", "股票数量"]
+            sub_stats["涨停数"] = 0
         sub_stats = sub_stats.sort_values("平均分", ascending=False).reset_index(drop=True)
         sub_stats["排名"] = range(1, len(sub_stats) + 1)
         sub_stats = sub_stats[["排名", "子概念", "股票数量", "平均分", "最高分", "涨停数"]]
@@ -453,6 +567,23 @@ class ExcelReporter(ReporterBase):
                 # 应用数据样式
                 for c_idx in range(1, 17):
                     self.styler.style.apply(ws, current_row, c_idx, "data")
+                # P2: 涨停股浅红底高亮 + 高分股加粗
+                is_limit_up = int(row.get("涨停", 0)) == 1
+                score = int(row.get("总得分", 0))
+                limit_up_fill = PatternFill(start_color="FFD6D6", end_color="FFD6D6", fill_type="solid")
+                if is_limit_up:
+                    for c_idx in range(1, 17):
+                        ws.cell(row=current_row, column=c_idx).fill = limit_up_fill
+                if score >= 15:
+                    for c_idx in range(1, 17):
+                        cell = ws.cell(row=current_row, column=c_idx)
+                        if cell.font:
+                            cell.font = Font(
+                                name=cell.font.name or "微软雅黑",
+                                bold=True,
+                                color=cell.font.color or "000000",
+                                size=cell.font.size or 9
+                            )
                 current_row += 1
 
         self.styler.auto_width(ws)
@@ -489,7 +620,7 @@ class ExcelReporter(ReporterBase):
 
         # 3. TOP5
         if "top5" in data:
-            self._build_top5_sheet(wb, data["top5"])
+            self._build_top5_sheet(wb, data["top5"], data.get("summary"))
 
         # 4. 各板块明细
         if "sectors" in data:

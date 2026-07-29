@@ -103,7 +103,11 @@ def compute_heat_scores(
         total = max(len(df_dedup), 1)
 
         # ---- 原始指标（使用去重后的 df）----
-        limit_up_count = int(row.get("涨停数", 0))
+        # 4.1: 涨停密度用去重后 df 的"涨停"字段，避免同股多行重复计数
+        if "涨停" in df_dedup.columns:
+            limit_up_count = int(df_dedup["涨停"].sum())
+        else:
+            limit_up_count = int(row.get("涨停数", 0))
 
         # 涨跌幅列（data_loader 已统一为涨跌幅，旧CSV数据仍用涨停率%）
         change_col = "涨跌幅" if "涨跌幅" in df_dedup.columns else ("涨停率%" if "涨停率%" in df_dedup.columns else None)
@@ -213,27 +217,32 @@ def _compute_trend(sector: str, current_score: float, history: dict,
     yesterday_score = scores_5d[-1] if scores_5d else None
 
     if not scores_5d or len(scores_5d) < 2:
-        # 冷启动：只看今日 vs 昨日（如无昨日则平稳）
+        # 4.3: 冷启动阈值与主分支统一（±3/±1）
         if yesterday_score is not None:
             delta = current_score - yesterday_score
-            if delta >= 5:
+            if delta >= 3:
                 return "📈升温"
-            elif delta <= -5:
+            elif delta <= -3:
                 return "📉退潮"
-            elif abs(delta) < 2:
+            elif abs(delta) < 1:
                 return "➡️平稳"
             else:
                 return "📈升温" if delta > 0 else "📉退潮"
         return "➡️平稳"
 
-    # 1. 线性回归斜率（每步变化量）
-    reg_slope = _linear_slope(scores_5d)
+    # 1. 线性回归斜率：把今日也纳入回归序列
+    all_scores = scores_5d + [current_score]
+    reg_slope = _linear_slope(all_scores)
 
     # 2. 今日 vs 昨日（边际变化）
     today_vs_yesterday = current_score - yesterday_score if yesterday_score is not None else 0
 
-    # 3. 综合：回归斜率 × 0.6 + 边际变化 × 0.4
+    # 3. 综合分
     combined = reg_slope * 0.6 + today_vs_yesterday * 0.4
+
+    # 4.2: 高位滞涨降档 — 回归斜率显示强势上行，但今日边际近乎停滞或反转
+    if reg_slope > 2 and today_vs_yesterday <= 0:
+        combined -= 2
 
     if combined >= 3:
         return "🔥加速"

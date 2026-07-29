@@ -92,8 +92,8 @@ class V8Style(StyleBase):
         for col in range(col_start, col_end + 1):
             self.apply(ws, row, col, cell_type)
 
-    def auto_width(self, ws, min_width: int = 8, max_width: int = 40):
-        """自动调整列宽"""
+    def auto_width(self, ws, min_width: int = 8, max_width: int = 50):
+        """自动调整列宽（P2: CJK字符按2宽度计算，max_width扩至50）"""
         for col_idx in range(1, ws.max_column + 1):
             col_letter = get_column_letter(col_idx)
             max_length = min_width
@@ -101,7 +101,13 @@ class V8Style(StyleBase):
                 for cell in row:
                     if cell.value:
                         try:
-                            cell_len = len(str(cell.value))
+                            s = str(cell.value)
+                            cell_len = 0
+                            for ch in s:
+                                if '一' <= ch <= '鿿' or '　' <= ch <= '〿' or '＀' <= ch <= '￯':
+                                    cell_len += 2  # CJK字符按2宽度
+                                else:
+                                    cell_len += 1
                             max_length = max(max_length, cell_len)
                         except:
                             pass

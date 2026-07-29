@@ -250,12 +250,7 @@ def send_report_summary(config: dict, data: dict, output_path: str, date_str: st
     if summary is not None and not summary.empty and '板块' in summary.columns:
         has_heat = "热度分" in summary.columns
         lines.append(f"📈 板块热度追踪 (对比: {past_date or '无历史'})")
-        lines.append("-" * 70)
-        if has_heat:
-            lines.append(f"{'板块':<12} {'热度':>6} {'趋势':>6} {'排名':>6} {'涨停':>6}")
-        else:
-            lines.append(f"{'板块':<12} {'排名':>6} {'均分':>8} {'涨停':>6}")
-        lines.append("-" * 70)
+        lines.append("")
         for _, row in summary.iterrows():
             sector = str(row.get('板块', '-'))
             rank = int(row.get('排名', 0)) if pd.notna(row.get('排名')) else 0
@@ -268,27 +263,24 @@ def send_report_summary(config: dict, data: dict, output_path: str, date_str: st
                 if past:
                     zt_arrow, _ = _delta_arrow(zt, past.get('涨停数'))
                     heat_arrow, _ = _delta_arrow(heat, past.get('热度分'))
-                    zt_str = f"{zt}{zt_arrow}"
-                    heat_str = f"{heat}{heat_arrow}"
+                    zt_str = f" 涨停{zt}{zt_arrow}"
+                    heat_str = f" 热度{heat}{heat_arrow}"
                 else:
-                    zt_str = f"{zt}-"
-                    heat_str = f"{heat}-"
-                lines.append(f"{sector:<12} {heat_str:>8} {trend:>6} {rank:>6} {zt_str:>6}")
+                    zt_str = f" 涨停{zt}"
+                    heat_str = f" 热度{heat}"
+                lines.append(f"{trend} {sector}  #{rank}{heat_str}{zt_str}")
             else:
                 avg = float(row.get('平均分', 0)) if pd.notna(row.get('平均分')) else 0.0
                 past = past_sectors.get(sector)
                 if past:
                     rank_arrow, _ = _delta_arrow(rank, past.get('排名', rank), reverse=True)
-                    avg_arrow, _ = _delta_arrow(avg, past.get('平均分', avg))
                     zt_arrow, _ = _delta_arrow(zt, past.get('涨停数', zt))
-                    rank_str = f"{rank}{rank_arrow}"
-                    avg_str = f"{avg:.1f}{avg_arrow}"
-                    zt_str = f"{zt}{zt_arrow}"
+                    rank_str = f"排名{rank}{rank_arrow}"
+                    zt_str = f"涨停{zt}{zt_arrow}"
                 else:
-                    rank_str = f"{rank}新"
-                    avg_str = f"{avg:.1f}-"
-                    zt_str = f"{zt}-"
-                lines.append(f"{sector:<12} {rank_str:>6} {avg_str:>8} {zt_str:>6}")
+                    rank_str = f"排名{rank}新"
+                    zt_str = f"涨停{zt}"
+                lines.append(f"{sector} {rank_str} 均分{avg:.1f} {zt_str}")
         lines.append("")
 
     if top5_list:

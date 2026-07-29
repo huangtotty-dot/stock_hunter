@@ -360,6 +360,7 @@ class DataLoader:
                         "子概念": concept,
                         "总得分": int(row.get("总得分", score)),
                         "涨跌幅": row.get("涨跌幅", 0) if pd.notna(row.get("涨跌幅")) else 0,
+                        "涨停": int(row.get("涨停", 0)) if pd.notna(row.get("涨停")) else 0,
                         "成交额": row.get("成交额", amount),
                         "D1强势形态且新高": int(row.get("D1强势形态且新高", 0)),
                         "D2强势形态": int(row.get("D2强势形态", 0)),
