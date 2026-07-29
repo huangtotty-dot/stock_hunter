@@ -1,0 +1,578 @@
+[
+  {
+    "name": "海信家电",
+    "code": "000921.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "冷却塔"
+    ]
+  },
+  {
+    "name": "华电科工",
+    "code": "601226.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "冷却塔"
+    ]
+  },
+  {
+    "name": "冰轮环境",
+    "code": "000811.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "冷却塔"
+    ]
+  },
+  {
+    "name": "海兰信",
+    "code": "300065.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷服务器"
+    ]
+  },
+  {
+    "name": "浪潮信息",
+    "code": "000977.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷服务器"
+    ]
+  },
+  {
+    "name": "中兴通讯",
+    "code": "000063.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷服务器"
+    ]
+  },
+  {
+    "name": "中科曙光",
+    "code": "603019.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷服务器"
+    ]
+  },
+  {
+    "name": "紫光股份",
+    "code": "000938.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷服务器"
+    ]
+  },
+  {
+    "name": "中国长城",
+    "code": "000066.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷服务器"
+    ]
+  },
+  {
+    "name": "高澜股份",
+    "code": "300499.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "浸没式液冷"
+    ]
+  },
+  {
+    "name": "网宿科技",
+    "code": "300017.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "浸没式液冷"
+    ]
+  },
+  {
+    "name": "科创源",
+    "code": "300731.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "浸没式液冷"
+    ]
+  },
+  {
+    "name": "依米康",
+    "code": "300249.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "浸没式液冷"
+    ]
+  },
+  {
+    "name": "阿飞服务",
+    "code": null,
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "浸没式液冷"
+    ]
+  },
+  {
+    "name": "英维克",
+    "code": "002837.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "温控设备"
+    ]
+  },
+  {
+    "name": "申菱环境",
+    "code": "301018.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "温控设备"
+    ]
+  },
+  {
+    "name": "依米康",
+    "code": "300249.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "温控设备"
+    ]
+  },
+  {
+    "name": "佳力图",
+    "code": "603912.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "温控设备"
+    ]
+  },
+  {
+    "name": "川润股份",
+    "code": "002272.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "温控设备"
+    ]
+  },
+  {
+    "name": "冰轮环境",
+    "code": "000811.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "温控设备"
+    ]
+  },
+  {
+    "name": "东贝集团",
+    "code": "601956.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "压缩机"
+    ]
+  },
+  {
+    "name": "汉钟精机",
+    "code": "002158.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "压缩机"
+    ]
+  },
+  {
+    "name": "雪人股份",
+    "code": "002639.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "压缩机"
+    ]
+  },
+  {
+    "name": "盾安环境",
+    "code": "002011.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "压缩机"
+    ]
+  },
+  {
+    "name": "联德股份",
+    "code": "605060.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "压缩机"
+    ]
+  },
+  {
+    "name": "英华特",
+    "code": "301272.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "压缩机"
+    ]
+  },
+  {
+    "name": "冰山冷热",
+    "code": "000530.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "压缩机"
+    ]
+  },
+  {
+    "name": "鑫磊股份",
+    "code": "301317.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "压缩机"
+    ]
+  },
+  {
+    "name": "华伍股份",
+    "code": "300095.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "汉钟精机",
+    "code": "002158.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "磁谷科技",
+    "code": "688448.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "鑫磊股份",
+    "code": "301317.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "百达精工",
+    "code": "603331.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "圣心翼中",
+    "code": null,
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "雪人股份",
+    "code": "002639.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "冰山冷热",
+    "code": "000530.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "冰轮环境",
+    "code": "000811.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "山科智能",
+    "code": "300897.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "金通灵",
+    "code": "300091.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "佳力图",
+    "code": "603912.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "磁悬浮压缩机"
+    ]
+  },
+  {
+    "name": "银轮股份",
+    "code": "002126.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "热交换"
+    ]
+  },
+  {
+    "name": "奥特维",
+    "code": "688516.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "热交换"
+    ]
+  },
+  {
+    "name": "同星科技",
+    "code": "301252.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "热交换"
+    ]
+  },
+  {
+    "name": "中石科技",
+    "code": "300684.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "热交换"
+    ]
+  },
+  {
+    "name": "锐新科技",
+    "code": "300828.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "热交换"
+    ]
+  },
+  {
+    "name": "飞荣达",
+    "code": "300602.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷模组"
+    ]
+  },
+  {
+    "name": "奇宏电子",
+    "code": null,
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷模组"
+    ]
+  },
+  {
+    "name": "精研科技",
+    "code": "300709.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷模组"
+    ]
+  },
+  {
+    "name": "捷邦科技",
+    "code": "301326.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷模组"
+    ]
+  },
+  {
+    "name": "思泉新材",
+    "code": "301489.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷模组"
+    ]
+  },
+  {
+    "name": "朗威股份",
+    "code": "301202.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "液冷模组"
+    ]
+  },
+  {
+    "name": "统一股份",
+    "code": "600506.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "冷却液"
+    ]
+  },
+  {
+    "name": "康普顿",
+    "code": "603798.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "冷却液"
+    ]
+  },
+  {
+    "name": "雅克科技",
+    "code": "002409.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "冷却液"
+    ]
+  },
+  {
+    "name": "江海股份",
+    "code": "002484.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "快换接头"
+    ]
+  },
+  {
+    "name": "逐浪股份",
+    "code": null,
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "快换接头"
+    ]
+  },
+  {
+    "name": "强瑞技术",
+    "code": "301128.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "快换接头"
+    ]
+  },
+  {
+    "name": "川润股份",
+    "code": "002272.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "快换接头"
+    ]
+  },
+  {
+    "name": "巨轮智能",
+    "code": "002031.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "快换接头"
+    ]
+  },
+  {
+    "name": "飞龙股份",
+    "code": "002536.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "CUD柜"
+    ]
+  },
+  {
+    "name": "大元泵业",
+    "code": "603757.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "CUD柜"
+    ]
+  },
+  {
+    "name": "南方泵业",
+    "code": "300145.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "CUD柜"
+    ]
+  },
+  {
+    "name": "强瑞技术",
+    "code": "301128.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "设备相关"
+    ]
+  },
+  {
+    "name": "快可智能",
+    "code": "603203.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "设备相关"
+    ]
+  },
+  {
+    "name": "凌天伟业",
+    "code": "300689.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "其他"
+    ]
+  },
+  {
+    "name": "中光防雷",
+    "code": "300414.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "其他"
+    ]
+  },
+  {
+    "name": "川环科技",
+    "code": "300547.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "其他"
+    ]
+  },
+  {
+    "name": "新朋股份",
+    "code": "002328.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "其他"
+    ]
+  },
+  {
+    "name": "厚中科技",
+    "code": "603516.SH",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "其他"
+    ]
+  },
+  {
+    "name": "博汇股份",
+    "code": "300839.SZ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "其他"
+    ]
+  },
+  {
+    "name": "美心顶尖",
+    "code": "920833.BJ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "北交所"
+    ]
+  },
+  {
+    "name": "曙光数创",
+    "code": "920808.BJ",
+    "jiuyan_category": "液冷",
+    "jiuyan_concept": [
+      "北交所"
+    ]
+  }
+]

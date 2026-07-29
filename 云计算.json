@@ -1,0 +1,450 @@
+[
+  {
+    "name": "中科曙光",
+    "code": "603019.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "DeepSeek"
+    ]
+  },
+  {
+    "name": "优刻得",
+    "code": "688158.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "DeepSeek"
+    ]
+  },
+  {
+    "name": "海天瑞声",
+    "code": "688787.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "DeepSeek"
+    ]
+  },
+  {
+    "name": "利欧股份",
+    "code": "002131.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "DeepSeek"
+    ]
+  },
+  {
+    "name": "南兴股份",
+    "code": "002757.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "DeepSeek"
+    ]
+  },
+  {
+    "name": "华为",
+    "code": null,
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "企业-华为云"
+    ]
+  },
+  {
+    "name": "阿里巴巴",
+    "code": null,
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "企业-阿里云"
+    ]
+  },
+  {
+    "name": "百度",
+    "code": null,
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "企业-百度云"
+    ]
+  },
+  {
+    "name": "腾讯",
+    "code": null,
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "企业-腾讯云"
+    ]
+  },
+  {
+    "name": "金山云",
+    "code": null,
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "企业-金山云"
+    ]
+  },
+  {
+    "name": "字节跳动",
+    "code": null,
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "企业-字节云"
+    ]
+  },
+  {
+    "name": "用友网络",
+    "code": "600588.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-管理、办公软件"
+    ]
+  },
+  {
+    "name": "金山办公",
+    "code": "688111.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-管理、办公软件"
+    ]
+  },
+  {
+    "name": "神州数码",
+    "code": "000034.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-税务"
+    ]
+  },
+  {
+    "name": "新国都",
+    "code": "300130.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-税务"
+    ]
+  },
+  {
+    "name": "广联达",
+    "code": "002410.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-垂直软件"
+    ]
+  },
+  {
+    "name": "石基信息",
+    "code": "002153.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-垂直软件"
+    ]
+  },
+  {
+    "name": "卫宁健康",
+    "code": "300253.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-垂直软件"
+    ]
+  },
+  {
+    "name": "超图软件",
+    "code": "300036.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-垂直软件"
+    ]
+  },
+  {
+    "name": "京北方",
+    "code": "002987.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-垂直软件"
+    ]
+  },
+  {
+    "name": "润和软件",
+    "code": "300339.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-垂直软件"
+    ]
+  },
+  {
+    "name": "焦点科技",
+    "code": "002315.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-其他"
+    ]
+  },
+  {
+    "name": "鼎捷软件",
+    "code": "300378.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-其他"
+    ]
+  },
+  {
+    "name": "致远互联",
+    "code": "688369.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-其他"
+    ]
+  },
+  {
+    "name": "科创信息",
+    "code": "300730.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-其他"
+    ]
+  },
+  {
+    "name": "网宿科技",
+    "code": "300017.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-其他"
+    ]
+  },
+  {
+    "name": "新开普",
+    "code": "300248.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-其他"
+    ]
+  },
+  {
+    "name": "万兴科技",
+    "code": "300624.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-其他"
+    ]
+  },
+  {
+    "name": "安恒信息",
+    "code": "688023.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-云安全"
+    ]
+  },
+  {
+    "name": "深信服",
+    "code": "300454.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-云安全"
+    ]
+  },
+  {
+    "name": "奇安信",
+    "code": "688561.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-云安全"
+    ]
+  },
+  {
+    "name": "启明星辰",
+    "code": "002439.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "SaaS软件与服务-云安全"
+    ]
+  },
+  {
+    "name": "优刻得",
+    "code": "688158.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "PaaS平台即服务"
+    ]
+  },
+  {
+    "name": "梦网科技",
+    "code": "002123.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "PaaS平台即服务"
+    ]
+  },
+  {
+    "name": "华云数据",
+    "code": null,
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "PaaS平台即服务"
+    ]
+  },
+  {
+    "name": "光环新网",
+    "code": "300383.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "IaaS基础设施服务"
+    ]
+  },
+  {
+    "name": "科华数据",
+    "code": "002335.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "IaaS基础设施服务"
+    ]
+  },
+  {
+    "name": "网宿科技",
+    "code": "300017.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "IaaS基础设施服务"
+    ]
+  },
+  {
+    "name": "奥飞数据",
+    "code": "300738.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "IaaS基础设施服务"
+    ]
+  },
+  {
+    "name": "数据港",
+    "code": "603881.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "IaaS基础设施服务"
+    ]
+  },
+  {
+    "name": "软通动力",
+    "code": "301236.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "IaaS基础设施服务"
+    ]
+  },
+  {
+    "name": "首都在线",
+    "code": "300846.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "IaaS基础设施服务"
+    ]
+  },
+  {
+    "name": "鹏博士",
+    "code": "600804.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "IaaS基础设施服务"
+    ]
+  },
+  {
+    "name": "中富通",
+    "code": "300560.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "IaaS基础设施服务"
+    ]
+  },
+  {
+    "name": "美利云",
+    "code": "000815.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "IaaS基础设施服务"
+    ]
+  },
+  {
+    "name": "中国电信",
+    "code": "601728.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "国资云"
+    ]
+  },
+  {
+    "name": "中国移动",
+    "code": "600941.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "国资云"
+    ]
+  },
+  {
+    "name": "中国联通",
+    "code": "600050.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "国资云"
+    ]
+  },
+  {
+    "name": "华胜天成",
+    "code": "600410.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "国资云"
+    ]
+  },
+  {
+    "name": "易华录",
+    "code": "300212.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "国资云"
+    ]
+  },
+  {
+    "name": "紫光股份",
+    "code": "000938.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "国资云"
+    ]
+  },
+  {
+    "name": "数字政通",
+    "code": "300075.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "国资云"
+    ]
+  },
+  {
+    "name": "美利云",
+    "code": "000815.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "国资云"
+    ]
+  },
+  {
+    "name": "云赛智联",
+    "code": "600602.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "国资云"
+    ]
+  },
+  {
+    "name": "美利云",
+    "code": "000815.SZ",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "国资云"
+    ]
+  },
+  {
+    "name": "杭钢股份",
+    "code": "600126.SH",
+    "jiuyan_category": "云计算",
+    "jiuyan_concept": [
+      "国资云"
+    ]
+  }
+]

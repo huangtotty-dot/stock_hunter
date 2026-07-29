@@ -1,0 +1,284 @@
+[
+  {
+    "name": "顺钠股份",
+    "code": "000533.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "三星医疗",
+    "code": "601567.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）", "其他"]
+  },
+  {
+    "name": "正泰电器",
+    "code": "601877.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "三变科技",
+    "code": "002112.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "中国西电",
+    "code": "601179.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "京泉华",
+    "code": "002885.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）", "SOFC"]
+  },
+  {
+    "name": "金盘科技",
+    "code": "688676.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "伊戈尔",
+    "code": "002922.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "保变电气",
+    "code": "600550.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "特变电工",
+    "code": "600089.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "四方股份",
+    "code": "601126.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "可立克",
+    "code": "002782.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "新特电气",
+    "code": "301120.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "华明装备",
+    "code": "002270.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "思源电气",
+    "code": "002028.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "望变电气",
+    "code": "603191.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["变压器（含SST）"]
+  },
+  {
+    "name": "飞沃科技",
+    "code": "301232.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "航亚科技",
+    "code": "688510.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "杰瑞股份",
+    "code": "002353.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "应流股份",
+    "code": "603308.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "万泽股份",
+    "code": "000534.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "航宇科技",
+    "code": "688239.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "博盈特焊",
+    "code": "688468.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "福鞍股份",
+    "code": "603315.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "豪迈科技",
+    "code": "002595.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "联德股份",
+    "code": "605060.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "隆达股份",
+    "code": "688231.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "精工科技",
+    "code": "002006.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "三角防务",
+    "code": "300775.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "常宝股份",
+    "code": "002478.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["燃气轮机"]
+  },
+  {
+    "name": "阳光电源",
+    "code": "300274.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["储能"]
+  },
+  {
+    "name": "阿特斯",
+    "code": "688472.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["储能"]
+  },
+  {
+    "name": "通润装备",
+    "code": "002150.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["储能"]
+  },
+  {
+    "name": "海博思创",
+    "code": "688411.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["储能"]
+  },
+  {
+    "name": "科陆电子",
+    "code": "002121.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["储能"]
+  },
+  {
+    "name": "西典新能",
+    "code": "603312.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["储能"]
+  },
+  {
+    "name": "东方日升",
+    "code": "300118.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["储能"]
+  },
+  {
+    "name": "天合光能",
+    "code": "688599.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["储能"]
+  },
+  {
+    "name": "冰轮环境",
+    "code": "000811.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["AIDC相关"]
+  },
+  {
+    "name": "盛弘股份",
+    "code": "300693.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["AIDC相关"]
+  },
+  {
+    "name": "宏发股份",
+    "code": "600885.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["AIDC相关"]
+  },
+  {
+    "name": "三环集团",
+    "code": "300408.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["SOFC"]
+  },
+  {
+    "name": "振华股份",
+    "code": "603067.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["SOFC"]
+  },
+  {
+    "name": "雄韬股份",
+    "code": "002733.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["SOFC"]
+  },
+  {
+    "name": "潍柴动力",
+    "code": "000338.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["SOFC"]
+  },
+  {
+    "name": "广信科技",
+    "code": "301534.SZ",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["其他"]
+  },
+  {
+    "name": "神马电力",
+    "code": "603530.SH",
+    "jiuyan_category": "电力",
+    "jiuyan_concept": ["其他"]
+  }
+]

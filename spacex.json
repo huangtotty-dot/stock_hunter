@@ -1,0 +1,200 @@
+[
+    {
+        "name": "利欧股份",
+        "code": "002131.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-参股"]
+    },
+    {
+        "name": "再升科技",
+        "code": "603601.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-参股-高性能高硅氧纤维"]
+    },
+    {
+        "name": "通宇通讯",
+        "code": "002792.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-参股-MacroWiFi"]
+    },
+    {
+        "name": "信维通信",
+        "code": "300136.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-参股-高性能连接器及线缆"]
+    },
+    {
+        "name": "罗博特科",
+        "code": "300757.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-参股"]
+    },
+    {
+        "name": "晋拓股份",
+        "code": "603211.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-参股-微波放大器-基站放大器-滤波器"]
+    },
+    {
+        "name": "双良节能",
+        "code": "600481.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-参股-大型热交换器"]
+    },
+    {
+        "name": "西部材料",
+        "code": "002149.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-供应商-航空合金"]
+    },
+    {
+        "name": "安徽合力",
+        "code": "600761.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-供应商-导流板"]
+    },
+    {
+        "name": "应流股份",
+        "code": "603308.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-供应商-熔模铸件"]
+    },
+    {
+        "name": "蔚蓝锂芯",
+        "code": "002245.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-供应商-Molicel电池"]
+    },
+    {
+        "name": "力量股份",
+        "code": "301071.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-供应商-陶瓷球"]
+    },
+    {
+        "name": "领益智造",
+        "code": "002600.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-供应商-轻量化-热控-电源组件"]
+    },
+    {
+        "name": "长川科技",
+        "code": "300604.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-供应商"]
+    },
+    {
+        "name": "鲁阳节能",
+        "code": "002088.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-供应商-陶瓷纤维-热管理"]
+    },
+    {
+        "name": "旭升集团",
+        "code": "603305.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-供应商-相控阵底盘和支架"]
+    },
+    {
+        "name": "斯瑞新材",
+        "code": "688102.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-供应商-液体火箭发动机燃烧室"]
+    },
+    {
+        "name": "天银机电",
+        "code": "300342.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-航天电子"]
+    },
+    {
+        "name": "铂力特",
+        "code": "688333.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-制造工艺"]
+    },
+    {
+        "name": "派克新材",
+        "code": "605123.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-先进锻造"]
+    },
+    {
+        "name": "宝钛股份",
+        "code": "600456.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-关键材料"]
+    },
+    {
+        "name": "超捷股份",
+        "code": "301005.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-航天结构件"]
+    },
+    {
+        "name": "旭升集团",
+        "code": "603305.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-航天结构件"]
+    },
+    {
+        "name": "蔚蓝锂芯",
+        "code": "002245.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-电源能源"]
+    },
+    {
+        "name": "迈为股份",
+        "code": "300751.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-光伏装备"]
+    },
+    {
+        "name": "钧达股份",
+        "code": "002865.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-光伏电池"]
+    },
+    {
+        "name": "康斯特",
+        "code": "300445.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-计量校准"]
+    },
+    {
+        "name": "东方日升",
+        "code": "300118.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-超薄p型HJT电池"]
+    },
+    {
+        "name": "蓝思科技",
+        "code": "300433.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-太阳能-UTG"]
+    },
+    {
+        "name": "埃科光电",
+        "code": "688610.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-光伏检测"]
+    },
+    {
+        "name": "晶盛机电",
+        "code": "300316.SZ",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-光伏产业链"]
+    },
+    {
+        "name": "奥特维",
+        "code": "688516.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-储能-硅钛矿"]
+    },
+    {
+        "name": "旭升集团",
+        "code": "603305.SH",
+        "jiuyan_category": "商业航天",
+        "jiuyan_concept": ["spacex-潜在供应商-相控阵底盘和支架"]
+    }
+]
