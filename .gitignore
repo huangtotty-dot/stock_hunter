@@ -16,3 +16,6 @@ Thumbs.db
 
 # Config with secrets
 config.json
+
+# Local backups
+*.bak_*
