@@ -180,17 +180,138 @@ class DetailRanker:
         return pd.DataFrame(ranked)
 
 
-# --------------- 扩展接口示例（注释） ---------------
-# class AiWeightedRanker(RankerBase):
-#     """AI 加权排名：引入情绪分调整权重"""
-#     def rank(self, items: List[dict]) -> List[dict]:
-#         def sort_key(item):
-#             score = item.get("总得分", 0)
-#             sentiment = item.get("情绪分", 50)
-#             adjusted = score * (1 + (sentiment - 50) / 100)
-#             return -adjusted
-#         return sorted(items, key=sort_key)
-#
-# 使用方式：
-# top5 = Top5Ranker()
-# top5.ranker = AiWeightedRanker()  # 替换排序策略
+# --------------- 增强版 TOP5：热度联动 + 概念稀缺性 ---------------
+
+class EnhancedTop5Ranker(Top5Ranker):
+    """
+    增强版 TOP5 生成器（v1.0）
+    在原有"板块分散+得分排序"基础上引入：
+    1. 板块热度动量：优先选择 🔥加速/📈升温 板块的标的
+    2. 概念稀缺性：横跨多概念（≥3个分类）的标的获得加分
+    3. 大成交额偏好：成交额>50亿的标的轻微加分
+
+    用法：
+        ranker = EnhancedTop5Ranker()
+        top5 = ranker.select(scored_list, summary_df=heat_summary_df)
+    """
+
+    def __init__(self, max_same_sector: int = 2, min_diversity: int = 3, top_count: int = 5,
+                 heat_weight: float = 0.3, scarcity_weight: float = 0.15, volume_weight: float = 0.05):
+        super().__init__(max_same_sector, min_diversity, top_count)
+        self.heat_weight = heat_weight
+        self.scarcity_weight = scarcity_weight
+        self.volume_weight = volume_weight
+
+    def select(self, stock_list: List[dict],
+               summary_df: pd.DataFrame = None,
+               category_stats: dict = None) -> List[dict]:
+        """
+        增强版 TOP5 选择
+
+        参数
+        ----
+        stock_list : 评分后的股票列表
+        summary_df : 概念总排名 DataFrame（含热度分、趋势列）
+        category_stats : 各分类标的数统计（用于概念稀缺性计算）
+        """
+        if not stock_list:
+            return []
+
+        # 1. 构建热度分查找表
+        heat_map = {}
+        if summary_df is not None and not summary_df.empty:
+            if "板块" in summary_df.columns and "热度分" in summary_df.columns:
+                for _, row in summary_df.iterrows():
+                    sector = str(row.get("板块", ""))
+                    heat = float(row.get("热度分", 0) or 0)
+                    trend = str(row.get("趋势", ""))
+                    heat_map[sector] = {"热度分": heat, "趋势": trend}
+
+        # 2. 计算概念稀缺性（跨分类数量）
+        if category_stats is None:
+            # 从 stock_list 自身推算（基于 韭研分类 字段）
+            category_stats = {}
+            for s in stock_list:
+                cat = s.get("所属板块", s.get("板块", ""))
+                category_stats[cat] = category_stats.get(cat, 0) + 1
+
+        # 3. 计算增强得分
+        enhanced_list = []
+        for stock in stock_list:
+            base_score = stock.get("总得分", 0)
+            sector = stock.get("所属板块", stock.get("板块", "未知"))
+
+            # 3a. 热度动量分
+            heat_info = heat_map.get(sector, {})
+            heat_score = heat_info.get("热度分", 30)  # 默认中等热度
+            trend = heat_info.get("趋势", "")
+            # 热度分归一化到 0-1
+            heat_bonus = heat_score / 100.0
+
+            # 3b. 概念稀缺分（横跨多分类）
+            concept_count = stock.get("暗线概念数", 1)
+            scarcity_bonus = min(concept_count / 10.0, 1.0)  # 最多 10 个概念 → 1.0
+
+            # 3c. 成交额分
+            amount = float(stock.get("成交额", 0) or 0)
+            volume_bonus = min(amount / 10e8, 1.0)  # 10亿 → 1.0
+
+            # 综合加权
+            enhanced_score = (
+                base_score * (1 - self.heat_weight - self.scarcity_weight - self.volume_weight) +
+                heat_bonus * 37 * self.heat_weight +
+                scarcity_bonus * 37 * self.scarcity_weight +
+                volume_bonus * 37 * self.volume_weight
+            )
+
+            enhanced_stock = dict(stock)
+            enhanced_stock["总得分"] = round(enhanced_score, 1)
+            enhanced_stock["原始得分"] = base_score
+            enhanced_stock["热度加成%"] = round(heat_bonus * 100, 1)
+            enhanced_stock["概念加成%"] = round(scarcity_bonus * 100, 1)
+            enhanced_stock["板块热度"] = heat_score
+            enhanced_stock["板块趋势"] = trend
+            enhanced_list.append(enhanced_stock)
+
+        # 4. 复用父类的去重+板块分散逻辑
+        deduped = self._deduplicate(enhanced_list)
+        sorter = ScoreRanker()
+        sorted_stocks = sorter.rank(deduped)
+
+        selected = []
+        sector_counts = {}
+        backup = []
+
+        for stock in sorted_stocks:
+            sector = stock.get("所属板块", stock.get("板块", "未知"))
+            if sector_counts.get(sector, 0) < self.max_same_sector:
+                selected.append(stock)
+                sector_counts[sector] = sector_counts.get(sector, 0) + 1
+            else:
+                backup.append(stock)
+            if len(selected) >= self.top_count:
+                break
+
+        # 5. 多样性补充
+        sectors_in_selected = set(s.get("所属板块", s.get("板块", "未知")) for s in selected)
+        if len(sectors_in_selected) < self.min_diversity and backup:
+            for stock in backup:
+                sector = stock.get("所属板块", stock.get("板块", "未知"))
+                if sector not in sectors_in_selected:
+                    selected.append(stock)
+                    sectors_in_selected.add(sector)
+                if len(sectors_in_selected) >= self.min_diversity or len(selected) >= self.top_count:
+                    break
+
+        # 6. 填充至 top_count
+        if len(selected) < self.top_count and backup:
+            for stock in backup:
+                if stock not in selected:
+                    selected.append(stock)
+                if len(selected) >= self.top_count:
+                    break
+
+        result = selected[:self.top_count]
+        for idx, stock in enumerate(result, 1):
+            stock["排名"] = idx
+        return result
