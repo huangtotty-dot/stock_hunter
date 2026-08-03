@@ -2470,8 +2470,10 @@
     "sector": "元件/超级电容/共封装光学(CPO)/5G",
     "sector_type": "legacy",
     "updated_at": "2026-06-17 12:07:32",
-    "jiuyan_concept": "AI领域MLCC",
-    "jiuyan_category": "MLCC"
+    "jiuyan_concept": "",
+    "jiuyan_category": "",
+    "jiuyan_category1": "PCB",
+    "jiuyan_concept1": "MLCC-AI领域"
   },
   "000637": {
     "business_summary": "主营化学原料和化学制品制造业",
@@ -3180,8 +3182,10 @@
     "sector": "军工电子Ⅱ/超级电容/第三代半导体/共封装光学(CPO)",
     "sector_type": "legacy",
     "updated_at": "2026-06-17 12:07:32",
-    "jiuyan_concept": "AI领域MLCC",
-    "jiuyan_category": "MLCC"
+    "jiuyan_concept": "",
+    "jiuyan_category": "",
+    "jiuyan_category1": "PCB",
+    "jiuyan_concept1": "MLCC-AI领域"
   },
   "000735": {
     "business_summary": "主营畜牧业",
@@ -15908,8 +15912,10 @@
     "sector": "其他电子Ⅱ/消费电子概念/超导概念/PET铜箔",
     "sector_type": "legacy",
     "updated_at": "2026-06-17 12:07:32",
-    "jiuyan_concept": "离型膜",
-    "jiuyan_category": "MLCC"
+    "jiuyan_concept": "",
+    "jiuyan_category": "",
+    "jiuyan_category1": "PCB",
+    "jiuyan_concept1": "MLCC-离型膜"
   },
   "002860": {
     "business_summary": "国内冰箱与冷柜压缩机热保护器、起动器和密封接线柱骨干生产企业",
@@ -21000,8 +21006,8 @@
     "jiuyan_category": "",
     "jiuyan_category1": "PCB",
     "jiuyan_concept1": "硅微粉",
-    "jiuyan_category2": "MLCC",
-    "jiuyan_concept2": "陶瓷粉体"
+    "jiuyan_category2": "PCB",
+    "jiuyan_concept2": "MLCC-陶瓷粉体"
   },
   "300286": {
     "business_summary": "主营电网设备",
@@ -22358,8 +22364,8 @@
     "jiuyan_category": "电力",
     "jiuyan_category1": "光通信",
     "jiuyan_concept1": "MPO|插芯",
-    "jiuyan_category2": "MLCC",
-    "jiuyan_concept2": "AI领域MLCC"
+    "jiuyan_category2": "PCB",
+    "jiuyan_concept2": "MLCC-AI领域"
   },
   "300409": {
     "business_summary": "主营电池",
@@ -29358,8 +29364,10 @@
     "sector": "专用设备/PCB概念/存储芯片/共封装光学(CPO)",
     "sector_type": "legacy",
     "updated_at": "2026-06-17 12:07:32",
-    "jiuyan_concept": "AI领域MLCC",
-    "jiuyan_category": "MLCC"
+    "jiuyan_concept": "",
+    "jiuyan_category": "",
+    "jiuyan_category1": "PCB",
+    "jiuyan_concept1": "MLCC-AI领域"
   },
   "301015": {
     "business_summary": "主营批发业",
@@ -34028,8 +34036,10 @@
     "sector": "元件/5G/军工/专精特新",
     "sector_type": "legacy",
     "updated_at": "2026-06-17 12:07:32",
-    "jiuyan_concept": "其他领域MLCC",
-    "jiuyan_category": "MLCC"
+    "jiuyan_concept": "",
+    "jiuyan_category": "",
+    "jiuyan_category1": "PCB",
+    "jiuyan_concept1": "MLCC-其他领域"
   },
   "301567": {
     "business_summary": "主营其他",
@@ -49604,8 +49614,8 @@
     "jiuyan_category": "",
     "jiuyan_category1": "商业航天",
     "jiuyan_concept1": "千帆星座",
-    "jiuyan_category2": "MLCC",
-    "jiuyan_concept2": "AI领域MLCC"
+    "jiuyan_category2": "PCB",
+    "jiuyan_concept2": "MLCC-AI领域"
   },
   "603268": {
     "business_summary": "船舶及高端装备的研发、生产和销售。",
@@ -52146,8 +52156,10 @@
     "sector": "军工电子Ⅱ/超级电容/5G/商业航天",
     "sector_type": "legacy",
     "updated_at": "2026-06-17 12:07:32",
-    "jiuyan_concept": "AI领域MLCC",
-    "jiuyan_category": "MLCC"
+    "jiuyan_concept": "",
+    "jiuyan_category": "",
+    "jiuyan_category1": "PCB",
+    "jiuyan_concept1": "MLCC-AI领域"
   },
   "603679": {
     "business_summary": "主营电气机械和器材制造业",
@@ -55262,8 +55274,8 @@
     "updated_at": "2026-06-17 12:29:31",
     "jiuyan_concept": "",
     "jiuyan_category": "",
-    "jiuyan_category1": "MLCC",
-    "jiuyan_concept1": "镍粉",
+    "jiuyan_category1": "PCB",
+    "jiuyan_concept1": "MLCC-镍粉",
     "jiuyan_category2": "太空光伏",
     "jiuyan_concept2": "太空光伏辅材"
   },
@@ -58156,8 +58168,10 @@
     "sector": "消费电子/光纤概念/消费电子概念",
     "sector_type": "legacy",
     "updated_at": "2026-06-17 12:07:32",
-    "jiuyan_concept": "其他领域MLCC",
-    "jiuyan_category": "MLCC"
+    "jiuyan_concept": "",
+    "jiuyan_category": "",
+    "jiuyan_category1": "PCB",
+    "jiuyan_concept1": "MLCC-其他领域"
   },
   "688261": {
     "business_summary": "高性能功率器件研发与销售。",
