@@ -35,6 +35,7 @@ def extract_sectors(watchlist: dict) -> dict:
     返回 {category_name: [{name, code, jiuyan_category, jiuyan_concept}, ...]}
     """
     sectors = defaultdict(list)
+    seen = defaultdict(set)  # 每个分类内按 code 去重
 
     for code, info in watchlist.items():
         if not isinstance(info, dict):
@@ -52,18 +53,21 @@ def extract_sectors(watchlist: dict) -> dict:
             if cat and str(cat).strip():
                 pairs.append((str(cat).strip(), str(concept).strip()))
 
-        # 旧格式回退
-        if not pairs:
-            cat = str(info.get("jiuyan_category", ""))
-            concept = str(info.get("jiuyan_concept", ""))
-            if cat and cat.strip():
-                for c in cat.split("|"):
-                    c = c.strip()
-                    if c:
-                        pairs.append((c, concept.strip()))
+        # 旧格式：legacy 始终纳入（股票可能同时存在 numbered 与 legacy 分类，
+        # 若仅在无 numbered 时回退会导致新增槽位后 legacy 分类丢失）
+        cat = str(info.get("jiuyan_category", ""))
+        concept = str(info.get("jiuyan_concept", ""))
+        if cat and cat.strip():
+            for c in cat.split("|"):
+                c = c.strip()
+                if c:
+                    pairs.append((c, concept.strip()))
 
-        # 加入各分类
+        # 加入各分类（同一分类内按 code 去重，避免 numbered/legacy 重复）
         for cat, concept in pairs:
+            if code in seen[cat]:
+                continue
+            seen[cat].add(code)
             sectors[cat].append({
                 "name": name,
                 "code": code,
