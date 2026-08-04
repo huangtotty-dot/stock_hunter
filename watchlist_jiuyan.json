@@ -4961,7 +4961,9 @@
     "sector_type": "legacy",
     "updated_at": "2026-05-30 21:48:57",
     "jiuyan_concept": "",
-    "jiuyan_category": ""
+    "jiuyan_category": "",
+    "jiuyan_category1": "可控核聚变",
+    "jiuyan_concept1": "第一壁材料-钨铜合金"
   },
   "000970": {
     "business_summary": "钕铁硼永磁材料的研发、生产和销售。中科院旗下，中国最大、全球第二大钕铁硼永磁材料生产企业",
@@ -12109,7 +12111,9 @@
     "jiuyan_category1": "液冷",
     "jiuyan_concept1": "快换接头",
     "jiuyan_category2": "HVDC",
-    "jiuyan_concept2": "配套相关"
+    "jiuyan_concept2": "配套相关",
+    "jiuyan_category3": "可控核聚变",
+    "jiuyan_concept3": "储能-超级电容"
   },
   "002486": {
     "business_summary": "主营纺织服装、服饰业",
@@ -22401,7 +22405,9 @@
     "sector_type": "legacy",
     "updated_at": "2026-05-30 21:48:57",
     "jiuyan_concept": "",
-    "jiuyan_category": ""
+    "jiuyan_category": "",
+    "jiuyan_category1": "可控核聚变",
+    "jiuyan_concept1": "通风系统-环境控制"
   },
   "300412": {
     "business_summary": "主营专用设备制造业",
@@ -32397,7 +32403,9 @@
     "sector_type": "legacy",
     "updated_at": "2026-05-30 21:48:57",
     "jiuyan_concept": "",
-    "jiuyan_category": ""
+    "jiuyan_category": "",
+    "jiuyan_category1": "可控核聚变",
+    "jiuyan_concept1": "特种线缆"
   },
   "301311": {
     "business_summary": "主营通用设备制造业",
@@ -39461,7 +39469,9 @@
     "sector_type": "legacy",
     "updated_at": "2026-05-30 21:48:57",
     "jiuyan_concept": "",
-    "jiuyan_category": ""
+    "jiuyan_category": "",
+    "jiuyan_category1": "可控核聚变",
+    "jiuyan_concept1": "石墨材料"
   },
   "600517": {
     "business_summary": "主营其他金融业",
@@ -43935,7 +43945,9 @@
     "sector_type": "legacy",
     "updated_at": "2026-05-30 21:48:57",
     "jiuyan_concept": "",
-    "jiuyan_category": ""
+    "jiuyan_category": "",
+    "jiuyan_category1": "可控核聚变",
+    "jiuyan_concept1": "超导电缆"
   },
   "600975": {
     "business_summary": "主营畜牧业",
@@ -46150,8 +46162,12 @@
     "sector": "其他电源设备Ⅱ/智能电网/可控核聚变",
     "sector_type": "legacy",
     "updated_at": "2026-06-24 11:21:37",
-    "jiuyan_concept": "半导体设备-光刻机整机",
-    "jiuyan_category": "半导体"
+    "jiuyan_concept": "",
+    "jiuyan_category": "",
+    "jiuyan_category1": "可控核聚变",
+    "jiuyan_concept1": "大科学装置-装备制造",
+    "jiuyan_category2": "半导体",
+    "jiuyan_concept2": "半导体设备-光刻机整机"
   },
   "601728": {
     "business_summary": "领先的大型全业务综合智能信息服务运营商，天翼云在全球运营商公有云IaaS中排名第一",
@@ -47115,7 +47131,9 @@
     "sector_type": "legacy",
     "updated_at": "2026-05-30 21:48:57",
     "jiuyan_concept": "",
-    "jiuyan_category": ""
+    "jiuyan_category": "",
+    "jiuyan_category1": "可控核聚变",
+    "jiuyan_concept1": "磁体锻压-设备制造"
   },
   "603012": {
     "business_summary": "主营专用设备制造业",
@@ -54923,7 +54941,9 @@
     "sector_type": "legacy",
     "updated_at": "2026-05-30 21:48:57",
     "jiuyan_concept": "",
-    "jiuyan_category": ""
+    "jiuyan_category": "",
+    "jiuyan_category1": "可控核聚变",
+    "jiuyan_concept1": "特种电缆"
   },
   "605228": {
     "business_summary": "主营汽车制造业",
@@ -56538,8 +56558,12 @@
     "sector": "金属新材料/航空发动机/商业航天/可控核聚变",
     "sector_type": "legacy",
     "updated_at": "2026-06-17 12:42:30",
-    "jiuyan_concept": "spacex-供应商-液体火箭发动机燃烧室|火箭-发动机|火箭-蓝箭火箭",
-    "jiuyan_category": "商业航天"
+    "jiuyan_concept": "",
+    "jiuyan_category": "",
+    "jiuyan_category1": "可控核聚变",
+    "jiuyan_concept1": "第一壁材料-铜合金",
+    "jiuyan_category2": "商业航天",
+    "jiuyan_concept2": "spacex-供应商-液体火箭发动机燃烧室|火箭-发动机|火箭-蓝箭火箭"
   },
   "688103": {
     "business_summary": "主营其他电子Ⅱ",
@@ -62189,7 +62213,9 @@
     "sector_type": "legacy",
     "updated_at": "2026-05-30 21:48:57",
     "jiuyan_concept": "",
-    "jiuyan_category": ""
+    "jiuyan_category": "",
+    "jiuyan_category1": "可控核聚变",
+    "jiuyan_concept1": "磁体电源-电力电子"
   },
   "688720": {
     "business_summary": "主营半导体",
